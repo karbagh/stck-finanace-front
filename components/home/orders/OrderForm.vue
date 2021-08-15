@@ -98,7 +98,7 @@
 import { required, email, helpers } from 'vuelidate/lib/validators'
 import SocialIcons from '../../dashboard/icons/socials/SocialIcons'
 import FormGroupInput from './fields/FormGroupInput'
-import axioses from '../../../axios/axioses'
+// import axioses from '../../../axios/axioses'
 const mobileFormat = helpers.regex('mobileFormat', /^(\+374)?\d{8}$/)
 export default {
   name: 'OrderForm',
@@ -136,9 +136,10 @@ export default {
         mobile: '',
         messengers: [],
         status: 'created',
-        devices: this.$store.state.cart.products.map((item) => {
-          return item.slug
-        })
+        // devices: this.$store.state.cart.products.map((item) => {
+        //   return item.slug
+        // })
+        devices: []
       },
       messages: {
         form: {
@@ -203,10 +204,10 @@ export default {
         title: 'danger'
       })
     },
-    onSubmit (event) {
-      event.preventDefault()
-      axioses.makeOrder(this.form, this.thenClosure, this.catchClosure)
-    }
+    // onSubmit (event) {
+    //   event.preventDefault()
+    //   axioses.makeOrder(this.form, this.thenClosure, this.catchClosure)
+    // }
   },
   created () {
     this.$root.$on('changeValue', (field) => {

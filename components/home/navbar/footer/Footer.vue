@@ -1,7 +1,9 @@
 <template>
   <section class="home-footer">
     <b-navbar type="dark" variant="dark">
-      <b-navbar-brand :to="{ name: 'home.index' }">NavBar</b-navbar-brand>
+      <NuxtLink to="/">
+        <b-navbar-brand>NavBar</b-navbar-brand>
+      </NuxtLink>
 
       <b-container>
           <b-col cols="12">

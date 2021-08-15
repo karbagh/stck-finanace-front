@@ -9,8 +9,6 @@
 
 <script>
 import { BIconCartPlusFill } from 'bootstrap-vue'
-import setters from '../../../../../local-storage/setters'
-import getters from '../../../../../local-storage/getters'
 
 export default {
   name: 'AddToCart',
@@ -58,12 +56,12 @@ export default {
       }
     }
   },
-  beforeDestroy () {
-    setters.cart.add(this.$store.state.cart)
-  },
-  created () {
-    this.$store.commit('fillCart', getters.cart.get())
-    getters.cart.remove()
-  }
+  // beforeDestroy () {
+  //   setters.cart.add(this.$store.state.cart)
+  // },
+  // created () {
+  //   this.$store.commit('fillCart', getters.cart.get())
+  //   getters.cart.remove()
+  // }
 }
 </script>

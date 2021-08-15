@@ -1,8 +1,8 @@
 <template>
   <section class="order-list">
     <b-card :title="$t('order.list')">
-      <CartListCard
-      :cartList="$store.state.cart.products"/>
+<!--      <CartListCard-->
+<!--      :cartList="$store.state.cart.devices"/>-->
     </b-card>
   </section>
 </template>

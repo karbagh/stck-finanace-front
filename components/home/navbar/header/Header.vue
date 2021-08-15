@@ -1,10 +1,12 @@
 <template>
   <section class="home-header">
     <b-navbar class="header-fixed-navbar" fixed="top" toggleable="xl" :type="navbarType" :variant="navbarVariant">
-      <b-navbar-brand :to="{name: 'home.index'}">
-        <Logo class="d-inline-block align-top header-logo" :alt="`${productionName} Logo`"/>
-        {{ productionName }}
-      </b-navbar-brand>
+      <NuxtLink to="/">
+        <b-navbar-brand>
+          <Logo class="d-inline-block align-top header-logo" :alt="`${$config.productionName} Logo`"/>
+          {{ $config.productionName }}
+        </b-navbar-brand>
+      </NuxtLink>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
@@ -12,11 +14,10 @@
           <b-nav-item href="#"></b-nav-item>
         </b-navbar-nav>
 
-        <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
           <b-button v-b-modal.cart-list variant="white" class="position-relative">
             <BIconCartFill class="text-white" :variant="navbarIconVariant"/>
-            <b-badge variant="danger" class="rounded-circle position-absolute">{{ $store.state.cart.products.length }}</b-badge>
+            <!--            <b-badge variant="danger" class="rounded-circle position-absolute">{{ $store.state.store.cart.products.length }}</b-badge>-->
           </b-button>
         </b-navbar-nav>
       </b-collapse>
@@ -25,41 +26,39 @@
 </template>
 
 <script>
-import { BIconCartFill } from 'bootstrap-vue'
-import config from '../../../../config'
-import Logo from '../../images/Logo'
+  import {BIconCartFill} from 'bootstrap-vue'
+  import Logo from '../../images/Logo'
 
-export default {
-  name: 'Header',
-  data () {
-    return {
-      productionName: config.productionName,
-      navbarType: 'light',
-      navbarVariant: 'white',
-      navbarIconVariant: 'secondary'
-    }
-  },
-  components: {
-    Logo,
-    BIconCartFill
-  },
-  methods: {
-    homeScrollChanges () {
-      if (window.scrollY > 60) {
-        this.navbarType = 'dark'
-        this.navbarVariant = 'dark'
-        this.navbarIconVariant = 'light'
-      } else {
-        this.navbarType = 'light'
-        this.navbarVariant = 'white'
-        this.navbarIconVariant = 'secondary'
+  export default {
+    data() {
+      return {
+        navbarType: 'light',
+        navbarVariant: 'white',
+        navbarIconVariant: 'secondary'
       }
+    },
+    components: {
+      Logo,
+      BIconCartFill
+    },
+    methods: {
+      homeScrollChanges() {
+        if (window.scrollY > 60) {
+          this.navbarType = 'dark'
+          this.navbarVariant = 'dark'
+          this.navbarIconVariant = 'light'
+        } else {
+          this.navbarType = 'light'
+          this.navbarVariant = 'white'
+          this.navbarIconVariant = 'secondary'
+        }
+      }
+    },
+    mounted() {
+      window.addEventListener('scroll', () => {
+        this.homeScrollChanges()
+      })
+      // this.state.commit('banners/increment')
     }
-  },
-  mounted () {
-    window.addEventListener('scroll', () => {
-      this.homeScrollChanges()
-    })
   }
-}
 </script>

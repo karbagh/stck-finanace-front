@@ -12,7 +12,6 @@
           tag="article"
           class="mb-2"
         >
-          <b-icon icon="exclamation-circle-fill"></b-icon>
         </b-card>
       </router-link>
     </b-col>
@@ -22,11 +21,14 @@
 export default {
   name: 'Category',
   props: {
-    category: Object
+    category: {
+      type: Object,
+      required: true
+    }
   },
   computed: {
     image () {
-      return this.category.image ?? '/defaults/emptyMain.jpg'
+      return this.category.image ?? require(`@/static/${this.$config.categoryDefaultImage}`)
     }
   }
 }

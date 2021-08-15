@@ -4,8 +4,8 @@
              :cancel-title="$t('cart.list.close')"
              :ok-title="$t('cart.list.order')"
              :title="$t('cart.list.title')">
-      <CartListCard
-        :cartList="$store.state.cart.products"/>
+<!--      <CartListCard-->
+<!--        :cartList="$store.state.store.cart.products"/>-->
     </b-modal>
   </section>
 </template>

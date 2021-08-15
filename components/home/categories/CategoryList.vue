@@ -40,7 +40,10 @@ export default {
     Category
   },
   props: {
-    categories: Array
+    categories: {
+      type: Array,
+      required: true
+    }
   }
 }
 </script>
