@@ -1,0 +1,40 @@
+.social-icon{
+    background-image: url('../icons/sprites/social-icons.png');
+    height: 50px;
+    width: 50px;
+    background-size: auto;
+    border-radius: 50%;
+}
+.social-icon.fa{
+    background-position: -21px -27px;
+}
+.social-icon.tw{
+    background-position: -91px -27px;
+}
+.social-icon.in{
+    background-position: -229px -27px;
+}
+.social-icon.inst{
+    background-position: 260px -67px;
+}
+.social-icon.msg{
+    background-position: 121px -67px;
+}
+.social-icon.skp{
+    background-position: 260px -132px;
+}
+.social-icon.snap{
+    background-position: 190px -67px;
+}
+.social-icon.wtsp{
+    background-position: -402px -130px;
+}
+.social-icon.ytb{
+    background-position: -390px -157px;
+}
+.social-icon.tel{
+    background-position: -473px -131px;
+}
+.social-icon.vib{
+    background-position: -403px -200px;
+}
