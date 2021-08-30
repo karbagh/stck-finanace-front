@@ -1,5 +1,7 @@
 export default () => {
   return {
-    list: []
+    list: [],
+    category: {},
+    categoryWithDevices: {},
   }
 }

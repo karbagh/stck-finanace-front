@@ -1,11 +1,17 @@
 <template>
   <section>
     <div class="m-4">
-      <b-card :header="$t('categories')"
+      <b-card header-tag="header"
               header-bg-variant="transparent"
               header-text-variant="dark"
               bg-variant="transparent"
               header-class="home-list-section-header">
+        <template #header>
+          <div class="d-flex flex-row justify-content-between">
+            <span>{{ $t('categories') }}</span>
+            <NuxtLink :to="'/categories'">{{ $t('see-all') }}</NuxtLink>
+          </div>
+        </template>
         <b-row>
           <b-col cols="12" class="position-relative">
             <Prev v-if="categories.length > 5" class="position-absolute d-none d-md-flex absolute-slide-controls slide-control-left" />

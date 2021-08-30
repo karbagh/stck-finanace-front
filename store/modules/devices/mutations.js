@@ -1,5 +1,5 @@
 export default {
-  GET_LIST: (state, list) => {
-    state.list = list
+  GET_DEVICE: (state, device) => {
+    state.device = device
   }
 }

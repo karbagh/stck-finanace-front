@@ -17,6 +17,7 @@ import Header from '@/components/home/navbar/header/Header'
 import Footer from '@/components/home/navbar/footer/Footer'
 import CartList from '@/components/home/cart/modals/CartList'
 import Logo from '@/components/home/images/Logo'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -25,15 +26,10 @@ export default {
     Footer,
     Header
   },
-  data () {
-    return {
-      loader: true
-    }
-  },
-  mounted () {
-    this.$root.$on('loader', (status) => {
-      this.loader = status
-    })
+  computed: {
+    ...mapGetters('modules/configs', [
+      'loader'
+    ])
   }
 }
 </script>

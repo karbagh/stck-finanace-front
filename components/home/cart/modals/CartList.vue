@@ -4,20 +4,25 @@
              :cancel-title="$t('cart.list.close')"
              :ok-title="$t('cart.list.order')"
              :title="$t('cart.list.title')">
-<!--      <CartListCard-->
-<!--        :cartList="$store.state.store.cart.products"/>-->
+      <CartListCard
+        :cartList="products"/>
     </b-modal>
   </section>
 </template>
 
 <script>
 import CartListCard from '../cards/CartListCard'
+import {mapGetters} from "vuex";
 
 export default {
   name: 'CartList',
-  components: { CartListCard },
-  data () {
-    return {}
+  components: {
+    CartListCard
+  },
+  computed: {
+    ...mapGetters('modules/cart', [
+      'products'
+    ])
   }
 }
 </script>

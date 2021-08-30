@@ -2,7 +2,7 @@
   <b-col cols="12" md="3">
     <section>
       <b-badge class="discount-badge-product-left-top" variant="danger" v-if="device.discount">{{ $t('discount')}} {{ device.discount }}%</b-badge>
-      <router-link :to="{name:'home.devices', params: {category: device.category, device: device.slug}}" class="text-decoration-none text-dark">
+      <NuxtLink :to="`/categories/${device.category}/devices/${device.slug}`" class="text-decoration-none text-dark">
         <b-card
           :title="device.model"
           :sub-title="device.brand"
@@ -19,7 +19,7 @@
             <span class="text-secondary text-right" v-if="device.made">{{ $t('y', {year: device.made}) }}</span>
           </div>
         </b-card>
-      </router-link>
+      </NuxtLink>
     </section>
   </b-col>
 </template>

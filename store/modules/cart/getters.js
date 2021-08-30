@@ -1,4 +1,4 @@
-// export default {
-//   devices: state => state.cart.devices,
-//   total: state => state.cart.total
-// }
+export default {
+  products: state => state.products,
+  total: state => state.total
+}

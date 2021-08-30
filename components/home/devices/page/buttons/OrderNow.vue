@@ -9,6 +9,7 @@
 
 <script>
 import { BIconCheckCircleFill } from 'bootstrap-vue'
+import {mapActions} from "vuex";
 
 export default {
   name: 'OrderNow',
@@ -22,8 +23,17 @@ export default {
     BIconCheckCircleFill
   },
   methods: {
-    async addToCart () {
-      await this.$store.commit('addToCart', {
+    ...mapActions('modules/cart', [
+      'addToCart'
+    ]),
+
+    ...mapActions('modules/configs', [
+      'loader'
+    ]),
+
+    async orderNow () {
+      await this.loader(true)
+      await this.addToCart({
         brand: this.product.brand,
         model: this.product.model,
         price: this.product.price,
@@ -32,12 +42,8 @@ export default {
         image: this.product.images[0] ?? null,
         quantity: 1
       })
-    },
-    async orderNow () {
-      this.$root.$emit('loader', true)
-      await this.addToCart()
-      await this.$router.push({ name: 'home.order' })
-      this.$root.$emit('loader', false)
+      await this.$router.push({ path: '/order' })
+      this.loader(true)
     }
   }
 }

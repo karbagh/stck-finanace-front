@@ -1,6 +1,6 @@
 <template>
     <b-col cols="12" md="3">
-      <router-link :to="{name: 'home.category', params:{category: category.slug}}"
+      <NuxtLink :to="`categories/${category.slug}`"
                    class="text-dark text-decoration-none">
         <b-card
           :title="category.name"
@@ -13,7 +13,7 @@
           class="mb-2"
         >
         </b-card>
-      </router-link>
+      </NuxtLink>
     </b-col>
 </template>
 

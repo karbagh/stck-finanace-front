@@ -6,6 +6,7 @@ import categories from './modules/categories'
 import collections from './modules/home'
 import devices from './modules/devices'
 import services from './modules/services'
+import configs from './modules/configs'
 
 Vue.use(Vuex)
 
@@ -17,5 +18,6 @@ const store = new Vuex.Store({
     collections: collections,
     devices: devices,
     services: services,
+    configs: configs,
   }
 })

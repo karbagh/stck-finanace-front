@@ -2,12 +2,13 @@
   <section class="devices-filter">
     <b-list-group flush>
       <b-list-group-item>
-        <b-checkbox-group :options="shortListBrands" v-model="filters.brands" @change="changeQuery('brands')"
+        <span>{{ $t('filterTypes.brands') }}</span>
+        <b-checkbox-group :options="shortListBrands" @change="filter" v-model="filterBrands"
                           name="model"></b-checkbox-group>
         <div class="see-more-buttons" v-if="brands.length > limit">
           <b-link @click="currentLimit = brands.length"
                   class="text-secondary font-weight-normal text-decoration-none small" v-if="currentLimit === limit">
-                  {{ $t('see-more', {count: brands.length - limit}) }}
+            {{ $t('see-more', {count: brands.length - limit}) }}
             <BIconChevronDown/>
           </b-link>
           <b-link @click="currentLimit = limit" class="text-secondary font-weight-normal text-decoration-none small"
@@ -17,13 +18,13 @@
         </div>
       </b-list-group-item>
       <b-list-group-item>
-        <b-form-checkbox v-model="filters.in_stock" @change="changeQuery('in_stock')" name="in-stock-button" switch>
+        <b-form-checkbox v-model="filters.in_stock" name="in-stock-button" @change="filter" switch>
           {{ $t('in_stock.true') }}
         </b-form-checkbox>
-        <b-form-checkbox v-model="filters.new" @change="changeQuery('new')" name="new-button" switch>
-          {{ $t('used.false') }}
+        <b-form-checkbox v-model="filters.used" name="in-stock-button" @change="filter" switch>
+          {{ $t('used.true') }}
         </b-form-checkbox>
-        <b-form-checkbox v-model="filters.discount" @change="changeQuery('discount')" name="discount-button" switch>
+        <b-form-checkbox v-model="filters.discount" name="in-stock-button" @change="filter" switch>
           {{ $t('discount') }}
         </b-form-checkbox>
       </b-list-group-item>
@@ -32,73 +33,56 @@
 </template>
 
 <script>
-import { BIconChevronDown, BIconChevronUp } from 'bootstrap-vue'
+import {mapActions} from "vuex";
 
 export default {
   name: 'Filters',
-  components: {
-    BIconChevronDown,
-    BIconChevronUp
-  },
-  data () {
+  data() {
     return {
       filters: {
-        brands: [],
         in_stock: false,
-        new: false,
+        used: false,
         discount: false
       },
       limit: 5,
-      currentLimit: this.limit
+      currentLimit: this.limit,
+      filterBrands: []
     }
   },
   props: {
     brands: Array,
+    // slug: String,
     query: Object
   },
   computed: {
-    shortListBrands () {
+    shortListBrands: function () {
       return this.brands.slice(0, this.currentLimit)
     }
   },
   methods: {
-    changeQueryForBoolType (filter) {
-      if (Object.prototype.hasOwnProperty.call(this.query, filter)) {
-        delete this.query[filter]
-      } else {
-        this.query[filter] = this.filters[filter]
-      }
-    },
-    changeQueryForArrayType (filter) {
-      if (!this.filters[filter].length) {
-        delete this.query[filter]
-      } else {
-        this.query[filter] = this.filters[filter]
-      }
-    },
-    async changeQuery (filter) {
-      if (typeof this.filters[filter] === 'boolean') {
-        await this.changeQueryForBoolType(filter)
-      } else if (Array.isArray(this.filters[filter])) {
-        await this.changeQueryForArrayType(filter)
+    ...mapActions('modules/configs', [
+      'loader'
+    ]),
+
+    ...mapActions('modules/categories', [
+      'categoryWithDevices'
+    ]),
+    async filter() {
+      const filters = {
+        ...Object.fromEntries(Object.entries(this.filters).filter((item) => {
+          return item[1]
+        })),
+        brands: this.filterBrands
       }
 
-      await this.$router.replace({ query: this.query })
-      this.$root.$emit('updateContent')
-    },
-    getQueryFilters () {
-      if (Object.keys(this.$route.query).length) {
-        if (this.$route.query.brands) {
-          this.filters.brands = typeof this.$route.query.brands === 'string' ? [this.$route.query.brands] : this.$route.query.brands
-        }
-        this.filters.in_stock = this.$route.query.in_stock ? this.$route.query.in_stock : false
-        this.filters.new = this.$route.query.new ? this.$route.query.new : false
-        this.filters.discount = this.$route.query.discount ? this.$route.query.discount : false
-      }
+      this.$root.$emit('filter', filters)
     }
   },
-  created () {
-    this.getQueryFilters()
+  async created() {
+    this.filters.in_stock = 'in_stock' in this.$route.query
+    this.filters.used = 'used' in this.$route.query
+    this.filters.discount = 'discount' in this.$route.query
+    this.filterBrands = 'brands' in this.$route.query ? this.$route.query.brands : this.filterBrands
   }
 }
 </script>
