@@ -124,3 +124,10 @@
 .slide-control-left{
     left: 0;
 }
+.device-list-overflow-auto{
+  height: 70vh;
+  overflow-y: auto;
+}
+.device-list-overflow-auto::-webkit-scrollbar{
+  display: none;
+}

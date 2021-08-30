@@ -129,6 +129,7 @@
   },
   "see-more": "Տեսնել ավելին({count})",
   "see-less": "Փակել",
+  "see-all": "Տեսնել բոլորը",
   "filterTypes": {
     "brands": "Բրենդ",
     "price": {
