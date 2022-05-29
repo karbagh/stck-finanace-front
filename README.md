@@ -1,4 +1,4 @@
-# it-store
+# Stock Finance
 
 ## Build Setup
 
