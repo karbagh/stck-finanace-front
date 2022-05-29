@@ -42,7 +42,6 @@ export default {
     'bootstrap-vue/nuxt',
     'nuxt-i18n',
     '@nuxtjs/axios',
-    ['@nuxt/press', 'common']
   ],
 
   axios: {
@@ -62,7 +61,7 @@ export default {
   },
 
   build: {},
-
+  babel: { compact: true },
   publicRuntimeConfig: {
     productionName: process.env.VUE_APP_NAME,
     apiUrl: process.env.VUE_APP_API_URL,
