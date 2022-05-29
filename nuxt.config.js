@@ -42,6 +42,7 @@ export default {
     'bootstrap-vue/nuxt',
     'nuxt-i18n',
     '@nuxtjs/axios',
+    ['@nuxt/press', 'common']
   ],
 
   axios: {
