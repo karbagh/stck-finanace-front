@@ -4,26 +4,26 @@
       <Logo  class="img-loader-logo"/>
     </div>
     <section class="home-content" v-show="!loader">
-      <Header />
+      <GuestHeader />
         <Nuxt />
     </section>
   </section>
 </template>
 
 <script>
-import Header from '@/components/home/navbar/header/Header'
+import GuestHeader from '@/components/home/navbar/header/guest/Index'
 import Logo from '@/components/home/images/Logo'
 import {mapActions, mapGetters} from 'vuex'
 
 export default {
   components: {
     Logo,
-    Header
+    GuestHeader
   },
   computed: {
     ...mapGetters('modules/configs', [
       'loader'
     ])
-  }
+  },
 }
 </script>

@@ -2,9 +2,9 @@
   <section class="home-body">
     <b-container class="my-3">
       <b-card
-        :title="$t('corporations')">
+        :title="$t('entities.clients')">
         <b-table
-          :items="corporations"
+          :items="clients"
           :fields="fields"
           :sort-direction="sortDirection"
           stacked="md"
@@ -24,21 +24,24 @@ export default {
   data() {
     return {
       fields: [
-        { key: 'name', label: 'Name', sortable: true, sortDirection: 'desc' },
-        { key: 'slug', label: 'Slug', sortable: true, class: 'text-center' },
-        { key: 'capital', label: 'Capital', sortable: true, class: 'text-center' },
+        { key: 'id', label: 'Id', sortable: true, class: 'text-center' },
+        { key: 'fullName', label: 'FullName', sortable: true, class: 'text-center' },
+        { key: 'email', label: 'Email', sortable: true, class: 'text-center' },
+        { key: 'username', label: 'Username', sortable: true, class: 'text-center' },
+        { key: 'budget', label: 'Budget', sortable: true, sortDirection: 'desc' },
+        { key: 'range', label: 'Range', sortable: true, class: 'text-center' },
       ],
       sortDirection: 'asc'
     }
   },
   async fetch({store, $config}) {
     await store.dispatch('modules/configs/loader', true)
-    await store.dispatch('modules/corporations/list')
+    await store.dispatch('modules/clients/list')
     await store.dispatch('modules/configs/loader', false)
   },
   computed: {
-    ...mapGetters('modules/corporations', {
-      corporations: 'list',
+    ...mapGetters('modules/clients', {
+      clients: 'list',
     }),
   },
   methods: {
@@ -48,7 +51,7 @@ export default {
   },
   mounted() {
     // Set the initial number of items
-    this.totalRows = this.corporations.length
+    this.totalRows = this.clients.length
   },
 }
 </script>

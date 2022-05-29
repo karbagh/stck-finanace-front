@@ -2,7 +2,7 @@
   <section class="home-body">
     <b-container class="my-3">
       <b-card
-        :title="$t('corporations')">
+        :title="$t('entities.corporations')">
         <b-table
           :items="corporations"
           :fields="fields"

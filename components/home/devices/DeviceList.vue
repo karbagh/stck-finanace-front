@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="m-4" v-if="collection.devices.length">
+    <div class="m-4" v-if="collection.devices.data.length">
       <b-card :header="$t(collection.type)"
               header-bg-variant="transparent"
               header-text-variant="dark"
@@ -11,7 +11,7 @@
             <b-row>
               <Device
                 :device="device"
-                v-for="device in collection.devices"
+                v-for="device in collection.devices.data"
                 v-bind:key="device.slug"/>
             </b-row>
           </b-col>

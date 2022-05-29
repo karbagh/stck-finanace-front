@@ -1,6 +1,6 @@
 <template>
   <section class="home-header">
-    <b-navbar class="header-fixed-navbar" fixed="top" toggleable="xl" :type="navbarType" :variant="navbarVariant">
+    <b-navbar class="header-fixed-navbar" fixed="top" toggleable="xl">
       <NuxtLink to="/">
         <b-navbar-brand>
           <Logo class="d-inline-block align-top header-logo" :alt="`${$config.productionName} Logo`"/>
@@ -11,13 +11,16 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="#"></b-nav-item>
-        </b-navbar-nav>
-
-        <b-navbar-nav class="ml-auto">
+          <b-nav-item>
+            <NuxtLink
+              v-for="item in navbarMenuList"
+              :to="item.href"
+              class="mx-3 top-header-item-link text-secondary">
+                {{ item.title }}
+            </NuxtLink>
+          </b-nav-item>
           <b-button v-b-modal.cart-list variant="white" class="position-relative">
-            <BIconCartFill class="text-white" :variant="navbarIconVariant"/>
-            <!--            <b-badge variant="danger" class="rounded-circle position-absolute">{{ $store.state.store.cart.products.length }}</b-badge>-->
+            <BIconCartFill class="text-white"/>
           </b-button>
         </b-navbar-nav>
       </b-collapse>
@@ -26,39 +29,52 @@
 </template>
 
 <script>
-  import {BIconCartFill} from 'bootstrap-vue'
-  import Logo from '../../images/Logo'
+import {BIconCartFill} from 'bootstrap-vue'
+import Logo from '../../images/Logo'
 
-  export default {
-    data() {
-      return {
-        navbarType: 'light',
-        navbarVariant: 'white',
-        navbarIconVariant: 'secondary'
-      }
-    },
-    components: {
-      Logo,
-      BIconCartFill
-    },
-    methods: {
-      homeScrollChanges() {
-        if (window.scrollY > 60) {
-          this.navbarType = 'dark'
-          this.navbarVariant = 'dark'
-          this.navbarIconVariant = 'light'
-        } else {
-          this.navbarType = 'light'
-          this.navbarVariant = 'white'
-          this.navbarIconVariant = 'secondary'
-        }
-      }
-    },
-    mounted() {
-      window.addEventListener('scroll', () => {
-        this.homeScrollChanges()
-      })
-      // this.state.commit('banners/increment')
+export default {
+  components: {
+    Logo,
+    BIconCartFill
+  },
+  data() {
+    return {
+      navbarMenuList: [
+        {
+          href: '/corporations',
+          title: this.$t('entities.corporations'),
+          name: 'corporations',
+        }, {
+          href: '/stocks',
+          title: this.$t('entities.stocks'),
+          name: 'stocks',
+        }, {
+          href: '/stocks/create',
+          title: this.$t('actions.create', {item: this.$t('entities.stocks')}),
+          name: 'stocks.create',
+        }, {
+          href: '/stocks/update',
+          title: this.$t('actions.update', {item: this.$t('entities.stocks')}),
+          name: 'stocks.update',
+        }, {
+          href: '/clients',
+          title: this.$t('entities.clients'),
+          name: 'clients',
+        },{
+          href: '/clients/create',
+          title: this.$t('actions.create', {item: this.$t('entities.clients')}),
+          name: 'clients.create',
+        }, {
+          href: '/clients/stock/purchase',
+          title: this.$t('actions.purchase', {item: this.$t('entities.stocks')}),
+          name: 'clients.purchase',
+        }, {
+          href: '/clients/stock/sell',
+          title: this.$t('actions.sell', {item: this.$t('entities.stocks')}),
+          name: 'clients.sell',
+        },
+      ]
     }
-  }
+  },
+}
 </script>

@@ -1,0 +1,62 @@
+{
+  "entities": {
+    "corporations": "Corporations",
+    "stocks": "Stocks",
+    "clients": "Clients"
+  },
+  "actions": {
+    "create": "Create {item}",
+    "update": "Update {item}",
+    "purchase": "Purchase {item}",
+    "sell": "Sell {item}"
+  },
+  "form": {
+    "login": {
+      "title": "Login"
+    },
+    "inputs": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your Email address",
+        "description": "Please provide a valid email."
+      },
+      "name": {
+        "label": "{item} Name ",
+        "placeholder": "Enter your {item} name"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password"
+      },
+      "price": {
+        "label": "Price",
+        "placeholder": "Enter stock price"
+      },
+      "firstName": {
+        "label": "First Name",
+        "placeholder": "Enter client first name"
+      },
+      "lastName": {
+        "label": "Last Name",
+        "placeholder": "Enter client last name"
+      },
+      "volume": {
+        "label": "Volume",
+        "placeholder": "Enter stock volume"
+      }
+    },
+    "options": {
+      "choose": "Please choose {item}"
+    },
+    "checkboxes": {
+      "rememberMe": {
+        "text": "Remember me"
+      }
+    },
+    "buttons": {
+      "login": {
+        "text": "Login"
+      }
+    }
+  }
+}

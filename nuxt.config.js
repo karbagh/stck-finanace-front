@@ -29,6 +29,8 @@ export default {
   plugins: [
     {
       src: '~/plugins/vuelidate.js',
+    },    {
+      src: '~/plugins/axios.js',
     },
   ],
 
@@ -39,7 +41,12 @@ export default {
   modules: [
     'bootstrap-vue/nuxt',
     'nuxt-i18n',
+    '@nuxtjs/axios',
   ],
+
+  axios: {
+    baseURL: process.env.VUE_APP_API_URL,
+  },
 
   i18n: {
     vueI18nLoader: true,
@@ -47,7 +54,7 @@ export default {
     locales: [
       {
         code: process.env.VUE_APP_I18N_LOCALE,
-        name: 'Հայերեն'
+        name: 'English'
       },
     ],
     vueI18n: i18n
@@ -58,6 +65,7 @@ export default {
   publicRuntimeConfig: {
     productionName: process.env.VUE_APP_NAME,
     apiUrl: process.env.VUE_APP_API_URL,
-    categoryDefaultImage: 'defaults/emptyMain.jpg',
+    clientId: process.env.VUE_APP_PASSPORT_CLIENT_ID,
+    clientSecret: process.env.VUE_APP_PASSPORT_CLIENT_SECRET,
   }
 }

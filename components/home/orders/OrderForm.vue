@@ -2,7 +2,7 @@
   <section class="order-form">
     <b-card :title="$t('order.form')">
 
-      <b-form @submit="onSubmit" v-if="show">
+      <b-form @submit.prevent="onSubmit" v-if="show">
         <b-row>
           <b-col cols="12">
             <b-row>
@@ -71,7 +71,7 @@
         <b-form-group id="input-group-4" v-slot="{ ariaDescribedby }">
           <b-form-checkbox-group
             class="d-flex align-items-center justify-content-between"
-            v-model="form.messengers.label"
+            v-model="form.messengers"
             id="checkboxes-4"
             :aria-describedby="ariaDescribedby"
           >
@@ -85,7 +85,7 @@
         </b-form-group>
 
         <b-button type="submit"
-                  :variant="[$v.form.$invalid ? 'secondary' : 'success']"
+                  :variant="$v.form.$invalid ? 'secondary' : 'success'"
                   class="order-form-submit col-12"
                   :disabled="$v.form.$invalid">{{ $t('order.send') }}</b-button>
 
@@ -98,7 +98,7 @@
 import { required, email, helpers } from 'vuelidate/lib/validators'
 import SocialIcons from '../../dashboard/icons/socials/SocialIcons'
 import FormGroupInput from './fields/FormGroupInput'
-// import axioses from '../../../axios/axioses'
+import {mapActions, mapGetters} from "vuex";
 const mobileFormat = helpers.regex('mobileFormat', /^(\+374)?\d{8}$/)
 export default {
   name: 'OrderForm',
@@ -136,10 +136,6 @@ export default {
         mobile: '',
         messengers: [],
         status: 'created',
-        // devices: this.$store.state.cart.products.map((item) => {
-        //   return item.slug
-        // })
-        devices: []
       },
       messages: {
         form: {
@@ -191,23 +187,22 @@ export default {
       show: true
     }
   },
+  computed: {
+    ...mapGetters('modules/cart', {
+      devices: 'products'
+    }),
+  },
   methods: {
-    async thenClosure () {
-      this.$root.$emit('loader', true)
-      await this.$store.commit('emptyCart')
-      await this.$router.push({ name: 'home.order.finished', params: { payment: 'cash', status: 'success' } })
-      this.$root.$emit('loader', false)
-    },
-    catchClosure () {
-      this.$bvToast.toast('', {
-        variant: 'danger',
-        title: 'danger'
-      })
-    },
-    // onSubmit (event) {
-    //   event.preventDefault()
-    //   axioses.makeOrder(this.form, this.thenClosure, this.catchClosure)
-    // }
+    ...mapActions('modules/corporations', [
+      'create'
+    ]),
+
+    onSubmit () {
+      this.create({
+        apiUrl: this.$config.apiUrl,
+        data: {...this.form, devices: this.devices}
+      });
+    }
   },
   created () {
     this.$root.$on('changeValue', (field) => {

@@ -1,23 +1,19 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import banners from './modules/banners'
-import cart from './modules/cart'
-import categories from './modules/categories'
-import collections from './modules/home'
-import devices from './modules/devices'
-import services from './modules/services'
+import corporations from './modules/corporations'
 import configs from './modules/configs'
+import auth from './modules/auth'
+import stocks from './modules/stocks'
+import clients from './modules/clients'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   modules: {
-    banners: banners,
-    cart: cart,
-    categories: categories,
-    collections: collections,
-    devices: devices,
-    services: services,
+    corporations: corporations,
     configs: configs,
+    auth: auth,
+    stocks: stocks,
+    clients: clients,
   }
 })

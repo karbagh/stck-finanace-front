@@ -2,11 +2,11 @@
   <b-form-group id="order_form"
                 :class="{ 'form-group--error': error }"
                 :label="`${label}: ${required ? '*' : ''}`"
-                label-for="input-2">
+                :label-for="id">
     <b-form-input
       :id="id"
       :name="name"
-      @input="changeValue"
+      @input.passive="changeValue"
       :placeholder="placeholder"
     ></b-form-input>
     <div v-if="error && validationList.length" class="error-messages">
@@ -57,12 +57,12 @@ export default {
     }
   },
   computed: {
-    validationList () {
+    validationList() {
       return Object.keys(this.messages)
     }
   },
   methods: {
-    changeValue (value) {
+    changeValue(value) {
       this.$root.$emit('changeValue', {
         value: value,
         field: this.name

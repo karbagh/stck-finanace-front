@@ -2,9 +2,9 @@
   <section class="home-body">
     <b-container class="my-3">
       <b-card
-        :title="$t('corporations')">
+        :title="$t('entities.stocks')">
         <b-table
-          :items="corporations"
+          :items="stocks"
           :fields="fields"
           :sort-direction="sortDirection"
           stacked="md"
@@ -24,21 +24,22 @@ export default {
   data() {
     return {
       fields: [
-        { key: 'name', label: 'Name', sortable: true, sortDirection: 'desc' },
-        { key: 'slug', label: 'Slug', sortable: true, class: 'text-center' },
-        { key: 'capital', label: 'Capital', sortable: true, class: 'text-center' },
+        { key: 'id', label: 'Id', sortable: true, class: 'text-center' },
+        { key: 'corporation', label: 'Corporation', sortable: true, sortDirection: 'desc' },
+        { key: 'price', label: 'Price', sortable: true, class: 'text-center' },
+        { key: 'updatedAt', label: 'UpdatedAt', sortable: true, class: 'text-center' },
       ],
       sortDirection: 'asc'
     }
   },
   async fetch({store, $config}) {
     await store.dispatch('modules/configs/loader', true)
-    await store.dispatch('modules/corporations/list')
+    await store.dispatch('modules/stocks/list')
     await store.dispatch('modules/configs/loader', false)
   },
   computed: {
-    ...mapGetters('modules/corporations', {
-      corporations: 'list',
+    ...mapGetters('modules/stocks', {
+      stocks: 'list',
     }),
   },
   methods: {
@@ -48,7 +49,7 @@ export default {
   },
   mounted() {
     // Set the initial number of items
-    this.totalRows = this.corporations.length
+    this.totalRows = this.stocks.length
   },
 }
 </script>
